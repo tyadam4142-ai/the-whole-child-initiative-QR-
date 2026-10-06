@@ -1,0 +1,591 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The Whole Child Initiative</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:#050b14;
+  color:#fff;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  width:500px;
+  height:500px;
+  background:#2463a8;
+  filter:blur(140px);
+  opacity:.18;
+  top:-180px;
+  left:-150px;
+  pointer-events:none;
+}
+
+body:after{
+  content:"";
+  position:fixed;
+  width:450px;
+  height:450px;
+  background:#d8a928;
+  filter:blur(160px);
+  opacity:.10;
+  bottom:-200px;
+  right:-150px;
+  pointer-events:none;
+}
+
+.container{
+  width:min(920px,92%);
+  margin:auto;
+}
+
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  text-align:center;
+  padding:50px 0;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 15px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:100px;
+  background:rgba(255,255,255,.05);
+  color:#dbeafe;
+  font-size:12px;
+  letter-spacing:1.5px;
+  animation:fadeUp .8s ease;
+}
+
+.dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#f2c75c;
+  box-shadow:0 0 15px #f2c75c;
+}
+
+h1{
+  font-size:clamp(48px,10vw,92px);
+  line-height:.95;
+  letter-spacing:-4px;
+  margin:25px 0;
+  animation:fadeUp 1s ease;
+}
+
+.gold{
+  color:#f2c75c;
+}
+
+.hero p{
+  max-width:650px;
+  margin:auto;
+  color:#aebdce;
+  font-size:18px;
+  animation:fadeUp 1.2s ease;
+}
+
+.scroll{
+  margin-top:55px;
+  color:#718096;
+  font-size:12px;
+  letter-spacing:2px;
+  animation:bounce 2s infinite;
+}
+
+section{
+  padding:90px 0;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:45px;
+}
+
+.section-title small{
+  color:#f2c75c;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:11px;
+}
+
+.section-title h2{
+  font-size:clamp(30px,6vw,52px);
+  line-height:1.05;
+  margin-top:10px;
+}
+
+.question{
+  font-size:clamp(30px,6vw,55px);
+  text-align:center;
+  line-height:1.1;
+  margin-bottom:35px;
+}
+
+.question span{
+  color:#f2c75c;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+.card{
+  padding:27px;
+  border-radius:22px;
+  background:linear-gradient(
+    145deg,
+    rgba(255,255,255,.09),
+    rgba(255,255,255,.035)
+  );
+  border:1px solid rgba(255,255,255,.09);
+  transition:.3s ease;
+}
+
+.card:hover{
+  transform:translateY(-7px);
+  border-color:rgba(242,199,92,.45);
+}
+
+.icon{
+  font-size:32px;
+  margin-bottom:15px;
+}
+
+.card h3{
+  margin-bottom:8px;
+  font-size:19px;
+}
+
+.card p{
+  color:#9eacbd;
+  font-size:14px;
+}
+
+.story{
+  padding:35px;
+  border-radius:25px;
+  background:
+    linear-gradient(135deg,rgba(242,199,92,.12),rgba(255,255,255,.04));
+  border:1px solid rgba(242,199,92,.18);
+}
+
+.story-number{
+  font-size:60px;
+  font-weight:800;
+  color:#f2c75c;
+  line-height:1;
+}
+
+.story h3{
+  font-size:25px;
+  margin:12px 0;
+}
+
+.story p{
+  color:#aebdce;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-top:20px;
+}
+
+.stat{
+  padding:25px 15px;
+  text-align:center;
+  background:rgba(255,255,255,.045);
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.07);
+}
+
+.stat strong{
+  display:block;
+  font-size:30px;
+  color:#f2c75c;
+}
+
+.stat span{
+  color:#8f9dad;
+  font-size:12px;
+}
+
+.cta{
+  text-align:center;
+  padding:75px 20px;
+}
+
+.cta h2{
+  font-size:clamp(34px,7vw,62px);
+  line-height:1;
+  margin-bottom:20px;
+}
+
+.cta p{
+  color:#9eacbd;
+  max-width:600px;
+  margin:auto;
+}
+
+.button{
+  display:inline-block;
+  margin-top:30px;
+  padding:17px 28px;
+  border-radius:14px;
+  background:#f2c75c;
+  color:#050b14;
+  text-decoration:none;
+  font-weight:800;
+  box-shadow:0 10px 35px rgba(242,199,92,.15);
+  transition:.25s;
+}
+
+.button:hover{
+  transform:translateY(-3px) scale(1.02);
+}
+
+.quote{
+  text-align:center;
+  font-size:clamp(23px,4vw,38px);
+  line-height:1.25;
+  max-width:760px;
+  margin:auto;
+}
+
+.quote strong{
+  color:#f2c75c;
+}
+
+footer{
+  text-align:center;
+  padding:35px 20px;
+  border-top:1px solid rgba(255,255,255,.07);
+  color:#657387;
+  font-size:12px;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(7px)}
+}
+
+@media(max-width:700px){
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  h1{
+    letter-spacing:-2px;
+  }
+
+  section{
+    padding:65px 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+
+    <div class="badge">
+      <span class="dot"></span>
+      THE WHOLE CHILD INITIATIVE
+    </div>
+
+    <h1>
+      What if school<br>
+      could prepare<br>
+      <span class="gold">you for life?</span>
+    </h1>
+
+    <p>
+      Beyond marks. Beyond examinations.
+      A vision for children who can think, create, communicate,
+      collaborate and lead.
+    </p>
+
+    <div class="scroll">
+      ↓ SCROLL TO EXPLORE
+    </div>
+
+  </div>
+</header>
+
+
+<!-- QUESTION -->
+<section>
+  <div class="container">
+
+    <div class="question">
+      A child can get<br>
+      <span>excellent marks.</span><br>
+      But are they ready for life?
+    </div>
+
+    <div class="story">
+
+      <div class="story-number">01</div>
+
+      <h3>
+        Academic success is only one part of the picture.
+      </h3>
+
+      <p>
+        Mathematics, science, languages and examinations matter.
+        But children also need communication, resilience, creativity,
+        financial literacy, teamwork, decision-making and adaptability.
+      </p>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- WHAT CHANGES -->
+<section>
+
+  <div class="container">
+
+    <div class="section-title">
+      <small>The idea</small>
+      <h2>Learn it.<br>Build it. Live it.</h2>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="icon">🤖</div>
+        <h3>Don't just study robotics.</h3>
+        <p>
+          Build a robot. Make mistakes. Debug it.
+          Make it move.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">💡</div>
+        <h3>Don't just study ideas.</h3>
+        <p>
+          Turn an idea into a project and discover
+          what it takes to make it real.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🎤</div>
+        <h3>Don't just study communication.</h3>
+        <p>
+          Debate. Present. Collaborate.
+          Learn to make your voice heard.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SKILLS -->
+<section>
+
+  <div class="container">
+
+    <div class="section-title">
+      <small>The whole child</small>
+      <h2>Skills that last<br>beyond school.</h2>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="icon">🧠</div>
+        <h3>Critical Thinking</h3>
+        <p>Question, analyse and solve unfamiliar problems.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🤝</div>
+        <h3>Collaboration</h3>
+        <p>Work with different people toward a common goal.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🚀</div>
+        <h3>Entrepreneurship</h3>
+        <p>Turn problems into ideas and ideas into action.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">💰</div>
+        <h3>Financial Literacy</h3>
+        <p>Understand money, choices, value and responsibility.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🎨</div>
+        <h3>Creativity</h3>
+        <p>Imagine possibilities instead of simply following answers.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">💪</div>
+        <h3>Resilience</h3>
+        <p>Learn how to handle failure, adapt and try again.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- IMPACT -->
+<section>
+
+  <div class="container">
+
+    <div class="section-title">
+      <small>Evidence matters</small>
+      <h2>Show the world<br>that it works.</h2>
+    </div>
+
+    <div class="story">
+
+      <div class="story-number">02</div>
+
+      <h3>
+        Research + real student stories
+      </h3>
+
+      <p>
+        The initiative will bring together verified research,
+        measurable outcomes and real examples of students applying
+        practical learning in the real world.
+      </p>
+
+      <div class="stats">
+
+        <div class="stat">
+          <strong>ADD</strong>
+          <span>Verified statistic</span>
+        </div>
+
+        <div class="stat">
+          <strong>ADD</strong>
+          <span>Research finding</span>
+        </div>
+
+        <div class="stat">
+          <strong>ADD</strong>
+          <span>Student success story</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PERSONAL MESSAGE -->
+<section>
+
+  <div class="container">
+
+    <div class="quote">
+      “Perhaps the next solution to a problem facing our society
+      is already sitting in a <strong>classroom.</strong>
+      We simply need to give that student the opportunity to build it.”
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CTA -->
+<section class="cta">
+
+  <div class="container">
+
+    <h2>
+      Help us build<br>
+      <span class="gold">the future of education.</span>
+    </h2>
+
+    <p>
+      Are you an educator, school, organisation, parent or student
+      who believes education should go beyond textbooks and examinations?
+    </p>
+
+    <a
+      class="button"
+      href="mailto:websites@dynamicrobotics53.com?subject=Whole Child Initiative - Register Interest"
+    >
+      ✦ Register Your Interest
+    </a>
+
+  </div>
+
+</section>
+
+
+<footer>
+  The Whole Child Initiative · Presented by Adam Bhaimia
+</footer>
+
+</body>
+</html>
+```
